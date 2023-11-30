@@ -1,9 +1,23 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/authOperations";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate;
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const loginUser = {
+      email: e.currentTarget.elements.email.value,
+      password: e.currentTarget.elements.password.value,
+    };
+    dispatch(login(loginUser));
+    navigate("/profile", { replace: true });
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label htmlFor="email">
           <input type="email" name="email" required />
         </label>

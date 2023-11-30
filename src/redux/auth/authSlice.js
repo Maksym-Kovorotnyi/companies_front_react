@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, register } from "./authOperations";
+import { currentUser, login, logout, register } from "./authOperations";
 
 const authInitialState = {
   user: {},
   accessToken: null,
+  nickname: "",
   isLoading: false,
+  isNewUser: false,
 };
 
 function loginFulfilled(state, { payload }) {
-  state.user = payload.user;
-  state.accessToken = payload.accessToken;
+  state.accessToken = payload.token;
+  state.nickname = payload.nickname;
 }
 
 function logOutFulfilled(state) {
@@ -24,11 +26,13 @@ export const authSlice = createSlice({
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;
+        state.isNewUser = false;
       })
-      .addCase(register.fulfilled, (state, { payload }) => {
+      .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
+        state.isNewUser = true;
       })
-      .addCase(register.rejected, (state, { payload }) => {
+      .addCase(register.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(login.pending, (state) => {
@@ -37,11 +41,19 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, loginFulfilled)
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
       })
       .addCase(logout.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
+      })
+      .addCase(currentUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(currentUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload;
+      })
+      .addCase(currentUser.rejected, (state) => {
+        state.isLoading = false;
       })
       .addCase(logout.fulfilled, logOutFulfilled)
       .addCase(logout.rejected, (state, { payload }) => {
