@@ -13,7 +13,7 @@ export const createCompany = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       return rejectWithValue(error);
     }
