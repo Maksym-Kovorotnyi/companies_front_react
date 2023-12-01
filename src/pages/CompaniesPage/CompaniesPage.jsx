@@ -4,6 +4,7 @@ import { getCompanies } from "../../redux/companies/companiesOperations";
 import CompaniesList from "../../components/CompaniesList/CompaniesList";
 import Modal from "../../components/Modal/Modal";
 import AddCompanyBtn from "../../components/AddCompanyBtn/AddCompanyBtn";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 function CompaniesPage() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function CompaniesPage() {
   }, [dispatch]);
   return (
     <div>
+      <SearchBar />
       <AddCompanyBtn />
       <CompaniesList />
       {isModalOpen ? <Modal /> : ""}

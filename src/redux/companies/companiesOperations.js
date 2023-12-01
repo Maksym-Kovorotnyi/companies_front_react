@@ -36,3 +36,54 @@ export const getCompanies = createAsyncThunk(
     }
   }
 );
+
+export const companyDetail = createAsyncThunk(
+  "companies/detail",
+  async (id, { rejectWithValue, getState }) => {
+    const { accessToken } = getState().auth;
+    try {
+      const response = await axios.get(`companies/detail/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const searchByName = createAsyncThunk(
+  "companies/",
+  async (name, { rejectWithValue, getState }) => {
+    const { accessToken } = getState().auth;
+    try {
+      const response = await axios.get(`companies/${name}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteCompany = createAsyncThunk(
+  "companies/delete",
+  async (id, { rejectWithValue, getState }) => {
+    const { accessToken } = getState().auth;
+    try {
+      const response = await axios.delete(`companies/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
