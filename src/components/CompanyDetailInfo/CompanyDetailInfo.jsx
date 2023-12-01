@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CompanyDeleteBtn from "../CompanyDeleteBtn/CompanyDeleteBtn";
+import CompanyUpdateBtn from "../CompanyUpdateBtn/CompanyUpdateBtn";
 
 function CompanyDetailInfo() {
   const {
@@ -21,6 +22,7 @@ function CompanyDetailInfo() {
       <p>Description: {description}</p>
       <p>Type: {type}</p>
       <CompanyDeleteBtn />
+      <CompanyUpdateBtn />
     </div>
   );
 }

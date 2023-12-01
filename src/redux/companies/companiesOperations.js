@@ -87,3 +87,20 @@ export const deleteCompany = createAsyncThunk(
     }
   }
 );
+
+export const updateCompany = createAsyncThunk(
+  "companies/update",
+  async ({ id, body }, { rejectWithValue, getState }) => {
+    const { accessToken } = getState().auth;
+    try {
+      const response = await axios.patch(`companies/update/${id}`, body, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

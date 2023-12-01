@@ -4,6 +4,7 @@ import {
   deleteCompany,
   getCompanies,
   searchByName,
+  updateCompany,
 } from "./companiesOperations";
 
 const companiesInitialState = {
@@ -11,6 +12,7 @@ const companiesInitialState = {
   companyDetail: null,
   isModal: false,
   isLoading: false,
+  isUpdating: true,
 };
 
 export const companiesSlice = createSlice({
@@ -60,6 +62,17 @@ export const companiesSlice = createSlice({
     builder.addCase(deleteCompany.pending, (state) => {
       state.isLoading = true;
     });
+
+    builder.addCase(updateCompany.fulfilled, (state) => {
+      state.isLoading = false;
+      state.companyDetail = null;
+    });
+    builder.addCase(updateCompany.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(updateCompany.pending, (state) => {
+      state.isLoading = true;
+    });
   },
   reducers: {
     toggleModal: (state) => {
@@ -68,8 +81,12 @@ export const companiesSlice = createSlice({
     toggleCompanyDetail: (state) => {
       state.companyDetail = null;
     },
+    updateListener: (state, { payload }) => {
+      state.isUpdating = payload;
+    },
   },
 });
 
-export const { toggleModal, toggleCompanyDetail } = companiesSlice.actions;
+export const { toggleModal, toggleCompanyDetail, updateListener } =
+  companiesSlice.actions;
 export const companiesReducer = companiesSlice.reducer;
