@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleModal } from "../../redux/companies/companiesSlice";
+import css from "./AddCompanyBtn.module.css";
 
 function AddCompanyBtn() {
   const dispatch = useDispatch();
@@ -8,9 +9,10 @@ function AddCompanyBtn() {
   const handleModalClose = () => {
     dispatch(toggleModal());
   };
+
   return (
     <>
-      <button type="button" onClick={handleModalClose}>
+      <button className={css.btn} type="button" onClick={handleModalClose}>
         Add new company
       </button>
     </>

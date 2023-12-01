@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateListener } from "../../redux/companies/companiesSlice";
+import css from "./CompanyUpdateBtn.module.css";
 
 function CompanyUpdateBtn() {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ function CompanyUpdateBtn() {
   };
   return (
     <>
-      <button type="button" onClick={handleUpdateForm}>
+      <button className={css.btn} type="button" onClick={handleUpdateForm}>
         Change company information
       </button>
     </>

@@ -55,11 +55,11 @@ export const companyDetail = createAsyncThunk(
 );
 
 export const searchByName = createAsyncThunk(
-  "companies/",
+  "companies/search",
   async (name, { rejectWithValue, getState }) => {
     const { accessToken } = getState().auth;
     try {
-      const response = await axios.get(`companies/${name}`, {
+      const response = await axios.get(`companies/search/${name}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

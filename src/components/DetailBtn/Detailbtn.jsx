@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { companyDetail } from "../../redux/companies/companiesOperations";
 import { toggleModal } from "../../redux/companies/companiesSlice";
+import css from "./Detailbtn.module.css";
 
 function Detailbtn() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function Detailbtn() {
 
   return (
     <>
-      <button type="button" onClick={handleDetail}>
+      <button className={css.btn} type="button" onClick={handleDetail}>
         More information
       </button>
     </>

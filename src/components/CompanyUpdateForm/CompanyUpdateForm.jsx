@@ -8,6 +8,7 @@ import {
   toggleModal,
   updateListener,
 } from "../../redux/companies/companiesSlice";
+import css from "./CompanyUpdateForm.module.css";
 
 function CompanyUpdateForm() {
   const dispatch = useDispatch();
@@ -66,56 +67,76 @@ function CompanyUpdateForm() {
   };
   return (
     <div>
-      <form onSubmit={handleUpdate}>
-        <label htmlFor="name">Name:</label>
+      <form className={css.form} onSubmit={handleUpdate}>
+        <label className={css.label} htmlFor="name">
+          Name:
+        </label>
         <input
+          className={css.input}
           type="text"
           id="name"
           name="name"
           value={compName}
           onChange={handleInputs}
         />
-        <label htmlFor="address">Address:</label>
+        <label className={css.label} htmlFor="address">
+          Address:
+        </label>
         <input
+          className={css.input}
           type="text"
           id="address"
           name="address"
           value={compAddress}
           onChange={handleInputs}
         />
-        <label htmlFor="serviceOfActivity">Service of activity:</label>
+        <label className={css.label} htmlFor="serviceOfActivity">
+          Service of activity:
+        </label>
         <input
+          className={css.input}
           type="text"
           id="serviceOfActivity"
           name="serviceOfActivity"
           value={compServiceOfActivity}
           onChange={handleInputs}
         />
-        <label htmlFor="numberOfEmployees">Number Of employees:</label>
+        <label className={css.label} htmlFor="numberOfEmployees">
+          Number Of employees:
+        </label>
         <input
+          className={css.input}
           type="number"
           id="numberOfEmployees"
           name="numberOfEmployees"
           value={compNumberOfEmployees}
           onChange={handleInputs}
         />
-        <label htmlFor="description">Description:</label>
+        <label className={css.label} htmlFor="description">
+          Description:
+        </label>
         <input
+          className={css.input}
           type="text"
           id="description"
           name="description"
           value={compDescription}
           onChange={handleInputs}
         />
-        <label htmlFor="type">Type:</label>
+        <label className={css.label} htmlFor="type">
+          Type:
+        </label>
         <input
+          className={css.input}
           type="text"
           id="type"
           name="type"
           value={compType}
           onChange={handleInputs}
         />
-        <button type="submit">Update</button>
+        <button className={css.btn} type="submit">
+          Update
+        </button>
       </form>
     </div>
   );

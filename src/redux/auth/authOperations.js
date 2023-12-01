@@ -4,20 +4,13 @@ import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "http://localhost:3000/";
 
-// export const token = {
-//   set(accessToken) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = "";
-//   },
-// };
-
 export const register = createAsyncThunk(
   "auth/signup",
-  async (body, { rejectWithValue }) => {
+  async (body, { rejectWithValue, dispatch }) => {
     try {
       await axios.post("auth/signup", body);
+      const { email, password } = body;
+      dispatch(login({ email, password }));
     } catch (error) {
       return rejectWithValue(error);
     }

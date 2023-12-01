@@ -1,0 +1,16 @@
+.navContainer {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.navItem {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.navItem:hover {
+    border-bottom: 2px solid #fff;
+}

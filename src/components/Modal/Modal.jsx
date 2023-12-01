@@ -8,6 +8,7 @@ import {
 import CreateCompanyForm from "../CreateCompanyForm/CreateCompanyForm";
 import CompanyDetailInfo from "../CompanyDetailInfo/CompanyDetailInfo";
 import CompanyUpdateForm from "../CompanyUpdateForm/CompanyUpdateForm";
+import css from "./Modal.module.css";
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ const Modal = () => {
 
   return (
     <div>
-      <div className="overlay" onClick={handleModalClose}></div>
-      <div className="modal">
-        <button className="close-button" onClick={handleModalClose}>
+      <div className={css.overlay} onClick={handleModalClose}></div>
+      <div className={css.modal}>
+        <button className={css.closeButton} onClick={handleModalClose}>
           Close
         </button>
         {isUpdating ? (

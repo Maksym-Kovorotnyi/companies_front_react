@@ -6,18 +6,7 @@ const authInitialState = {
   accessToken: null,
   nickname: "",
   isLoading: false,
-  isNewUser: false,
 };
-
-function loginFulfilled(state, { payload }) {
-  state.accessToken = payload.token;
-  state.nickname = payload.nickname;
-}
-
-function logOutFulfilled(state) {
-  state.user = {};
-  state.accessToken = null;
-}
 
 export const authSlice = createSlice({
   name: "auth",
@@ -26,11 +15,9 @@ export const authSlice = createSlice({
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;
-        state.isNewUser = false;
       })
       .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
-        state.isNewUser = true;
       })
       .addCase(register.rejected, (state) => {
         state.isLoading = false;
@@ -38,7 +25,10 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, loginFulfilled)
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.accessToken = payload.token;
+        state.nickname = payload.nickname;
+      })
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;
       })
@@ -55,10 +45,12 @@ export const authSlice = createSlice({
       .addCase(currentUser.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(logout.fulfilled, logOutFulfilled)
-      .addCase(logout.rejected, (state, { payload }) => {
+      .addCase(logout.fulfilled, (state) => {
+        state.user = {};
+        state.accessToken = null;
+      })
+      .addCase(logout.rejected, (state) => {
         state.isLoading = false;
-        state.error = payload;
       });
   },
   reducers: {

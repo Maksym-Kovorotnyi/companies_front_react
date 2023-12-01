@@ -6,6 +6,8 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 import CompaniesPage from "./pages/CompaniesPage/CompaniesPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import { PrivateRoute } from "./routes/PrivateRoute/PrivateRoute";
+import { PublicRoute } from "./routes/PublicRoute/PublicRoute";
 
 function App() {
   return (
@@ -13,10 +15,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/companies" element={<CompaniesPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="" element={<PublicRoute />}>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+          </Route>
+          <Route path="" element={<PrivateRoute />}>
+            <Route path="/companies" element={<CompaniesPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>

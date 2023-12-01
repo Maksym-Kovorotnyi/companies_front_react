@@ -1,12 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/authOperations";
-import { useNavigate } from "react-router-dom";
+import css from "./RegisterForm.module.css";
 
 function RegisterForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isNewUser = useSelector((state) => state.auth.isNewUser);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -20,50 +18,74 @@ function RegisterForm() {
       password: e.currentTarget.elements.password.value,
     };
     dispatch(register(newUser));
-    if (isNewUser) {
-      navigate("/login", { replace: true });
-    }
   };
+
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="firstname">
+    <>
+      <form onSubmit={handleFormSubmit} className={css.form}>
+        <label className={css.label} htmlFor="firstname">
           First name
-          <input type="text" name="firstname" placeholder="John" required />
+          <input
+            className={css.input}
+            type="text"
+            name="firstname"
+            placeholder="John"
+            required
+          />
         </label>
-        <label htmlFor="lastname">
+        <label className={css.label} htmlFor="lastname">
           Last name
-          <input type="text" name="lastname" placeholder="Smith" required />
+          <input
+            className={css.input}
+            type="text"
+            name="lastname"
+            placeholder="Smith"
+            required
+          />
         </label>
-        <label htmlFor="nickname">
+        <label className={css.label} htmlFor="nickname">
           Nickname
-          <input type="text" name="nickname" placeholder="John_S" required />
+          <input
+            className={css.input}
+            type="text"
+            name="nickname"
+            placeholder="John_S"
+            required
+          />
         </label>
-        <label htmlFor="email">
+        <label className={css.label} htmlFor="email">
           Email
           <input
+            className={css.input}
             type="email"
             name="email"
             placeholder="Example@gmail.com"
             required
           />
         </label>
-        <label htmlFor="phone">
+        <label className={css.label} htmlFor="phone">
           Phone number
           <input
+            className={css.input}
             type="text"
             name="phone"
             placeholder="+380999999999"
             required
           />
         </label>
-        <label htmlFor="description">
+        <label className={css.label} htmlFor="description">
           Description
-          <textarea type="text" name="description" required />
+          <textarea
+            className={css.textarea}
+            type="text"
+            name="description"
+            required
+          />
         </label>
-        <label htmlFor="password">
+        <label className={css.label} htmlFor="password">
           Password
           <input
+            className={css.input}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
             type="password"
             name="password"
@@ -71,9 +93,11 @@ function RegisterForm() {
             required
           />
         </label>
-        <button type="submit">Sign up</button>
+        <button className={css.btn} type="submit">
+          Sign up
+        </button>
       </form>
-    </div>
+    </>
   );
 }
 

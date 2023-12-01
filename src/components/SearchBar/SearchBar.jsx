@@ -1,18 +1,29 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { searchByName } from "../../redux/companies/companiesOperations";
+import {
+  getCompanies,
+  searchByName,
+} from "../../redux/companies/companiesOperations";
+import css from "./SearchBar.module.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchByName(e.currentTarget[0].value));
+    const searchTerm = e.currentTarget[0].value;
+    if (searchTerm.trim() === "") {
+      dispatch(getCompanies());
+    } else {
+      dispatch(searchByName(searchTerm));
+    }
   };
   return (
     <>
-      <form onSubmit={handleSearchSubmit}>
-        <input type="text" />
-        <button type="submit">Search</button>
+      <form className={css.form} onSubmit={handleSearchSubmit}>
+        <input className={css.input} type="text" />
+        <button className={css.btn} type="submit">
+          Search
+        </button>
       </form>
     </>
   );

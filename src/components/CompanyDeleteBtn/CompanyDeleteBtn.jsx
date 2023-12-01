@@ -5,6 +5,7 @@ import {
   getCompanies,
 } from "../../redux/companies/companiesOperations";
 import { toggleModal } from "../../redux/companies/companiesSlice";
+import css from "./CompanyDeleteBtn.module.css";
 
 function CompanyDeleteBtn() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function CompanyDeleteBtn() {
 
   return (
     <>
-      <button type="button" onClick={handleDeletebtn}>
+      <button className={css.btn} type="button" onClick={handleDeletebtn}>
         Delete
       </button>
     </>

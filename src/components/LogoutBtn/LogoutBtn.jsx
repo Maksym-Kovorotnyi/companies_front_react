@@ -2,6 +2,7 @@ import React from "react";
 import { logout } from "../../redux/auth/authOperations";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import css from "./LogoutBtn.module.css";
 
 function LogoutBtn() {
   const navigate = useNavigate();
@@ -11,11 +12,11 @@ function LogoutBtn() {
     navigate("/login", { replace: true });
   };
   return (
-    <div>
-      <button type="button" onClick={handleLogout}>
+    <>
+      <button className={css.btn} type="button" onClick={handleLogout}>
         Log out
       </button>
-    </div>
+    </>
   );
 }
 
